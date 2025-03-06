@@ -5,17 +5,17 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-    @overview = Overview.new
   end
 
   def new
     @list = List.new
+    @movies = @list.movies
   end
 
   def create
     @list = List.new(list_params)
     if @list.save
-      redirect_to movie_path(@list)
+      redirect_to list_path(@list)
     else
       render :new, status: :unprocessable_entity
     end
